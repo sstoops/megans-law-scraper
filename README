@@ -1,0 +1,16 @@
+A web scraper project to pull data from the California Megan's Law
+sex offender website at meganslaw.ca.gov.
+
+This scraper utilizes Selenium in conjunction with Scrapy. Selenium
+is required in order to begin the process of working through the
+website's JavaScript forms to accept disclaimers, perform searches
+and retrieve session data. Once this is setup, Selenium is terminated
+and the session data is passed to the native Scrapy spider to perform
+the actual data scraping.
+
+Currently the scraper runs with a few assumptions:
+
+- Chrome is used for Selenium
+- Only Orange County is scraped
+
+To change these behaviors, code will need added/modified.
