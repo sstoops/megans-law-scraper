@@ -4,6 +4,7 @@ cffi==0.8.6
 characteristic==14.2.0
 cryptography==0.6.1
 cssselect==0.9.1
+geopy==1.4.0
 gnureadline==6.3.3
 ipython==2.3.1
 lxml==3.4.1
