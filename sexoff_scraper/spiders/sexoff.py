@@ -31,10 +31,8 @@ class SexoffSpider(scrapy.Spider):
     start_urls = (
         'http://www.meganslaw.ca.gov/cgi/prosoma.dll?searchby=curno',
     )
-    pagination_url = "http://www.meganslaw.ca.gov/cgi/prosoma.dll?w6=%s\
-        &searchby=CountyList&SelectCounty=%s&SB=0&PageNo=%s"
-    profile_url = "http://www.meganslaw.ca.gov/cgi/prosoma.dll?w6=%s\
-        &searchby=offender&id=%s"
+    pagination_url = "http://www.meganslaw.ca.gov/cgi/prosoma.dll?w6=%s&searchby=CountyList&SelectCounty=%s&SB=0&PageNo=%s"
+    profile_url = "http://www.meganslaw.ca.gov/cgi/prosoma.dll?w6=%s&searchby=offender&id=%s"
     session_id = None
     pages = None
 
