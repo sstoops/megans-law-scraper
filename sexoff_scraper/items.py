@@ -15,3 +15,5 @@ class SexoffScraperItem(scrapy.Item):
     hair_color = scrapy.Field()
     ethnicity = scrapy.Field()
     address = scrapy.Field()
+    lat = scrapy.Field()
+    lng = scrapy.Field()

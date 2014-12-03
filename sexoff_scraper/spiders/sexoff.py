@@ -102,7 +102,8 @@ class SexoffSpider(scrapy.Spider):
         item['ethnicity'] = sel.xpath(
             '//td[@headers="ethnicityColHdr"]/text()').extract()[0].strip()
         item['address'] = sel.xpath(
-            '//td[@headers="lastKnwnAddrColHdr"]/text()').extract()[0].strip()
+            '//td[@headers="lastKnwnAddrColHdr"]/text()'
+            ).extract()[0].strip(', ')
         return item
 
     def parse(self, response):

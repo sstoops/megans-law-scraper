@@ -13,5 +13,9 @@ BOT_NAME = 'sexoff_scraper'
 SPIDER_MODULES = ['sexoff_scraper.spiders']
 NEWSPIDER_MODULE = 'sexoff_scraper.spiders'
 
+ITEM_PIPELINES = {
+    'sexoff_scraper.pipelines.GeocoderPipeline': 300
+}
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'sexoff_scraper (+http://www.yourdomain.com)'
