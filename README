@@ -5,12 +5,6 @@ The scraper utilized the python Scrapy project to search and retrieve
 data from the site. Objects are returned to Scrapy's control where
 the user can specify the output format.
 
-Currently the scraper runs with one major assumption:
-
-- Only Orange County is scraped
-
-To change this behavior, code will need added/modified.
-
 County choices:
 
 ALAMEDA
