@@ -38,9 +38,13 @@ class SexoffSpider(scrapy.Spider):
     session_id = None
     pages = None
 
-    def __init__(self, county, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super(SexoffSpider, self).__init__(*args, **kwargs)
-        self.county = county
+        county = kwargs.get('county')
+        if county in COUNTIES:
+            self.county = county
+        else:
+            raise scrapy.exceptions.CloseSpider('Please specify a county')
 
     def parse_first_page(self, response):
         sel = Selector(response)
