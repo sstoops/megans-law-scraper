@@ -13,6 +13,16 @@ from sexoff_scraper.items import SexoffScraperItem
 
 
 ID_RE = re.compile(r'.*\(\'(\w+)\'\)$')
+COUNTIES = ('ALAMEDA', 'ALPINE', 'AMADOR', 'BUTTE', 'CALAVERAS', 'COLUSA',
+    'CONTRA%20COSTA', 'DEL%20NORTE', 'EL%20DORADO', 'FRESNO', 'GLENN',
+    'HUMBOLDT', 'IMPERIAL', 'INYO', 'KERN', 'KINGS', 'LAKE', 'LASSEN',
+    'LOS%20ANGELES', 'MADERA', 'MARIN', 'MARIPOSA', 'MENDOCINO', 'MERCED',
+    'MODOC', 'MONO', 'MONTEREY', 'NAPA', 'NEVADA', 'ORANGE', 'PLACER',
+    'PLUMAS', 'RIVERSIDE', 'SACRAMENTO', 'SAN%20BENITO', 'SAN%20BERNARDINO',
+    'SAN%20DIEGO', 'SAN%20FRANCISCO', 'SAN%20JOAQUIN', 'SAN%20LUIS%20OBISPO',
+    'SAN%20MATEO', 'SANTA%20BARBARA', 'SANTA%20CLARA', 'SANTA%20CRUZ',
+    'SHASTA', 'SIERRA', 'SISKIYOU', 'SOLANO', 'SONOMA', 'STANISLAUS', 'SUTTER',
+    'TEHAMA', 'TRINITY', 'TULARE', 'TUOLUMNE', 'VENTURA', 'YOLO', 'YUBA')
 
 
 class SexoffSpider(scrapy.Spider):
@@ -21,10 +31,16 @@ class SexoffSpider(scrapy.Spider):
     start_urls = (
         'http://www.meganslaw.ca.gov/cgi/prosoma.dll?searchby=curno',
     )
-    pagination_url = "http://www.meganslaw.ca.gov/cgi/prosoma.dll?w6=%s&searchby=CountyList&SelectCounty=ORANGE&SB=0&PageNo=%s"
-    profile_url = "http://www.meganslaw.ca.gov/cgi/prosoma.dll?w6=%s&searchby=offender&id=%s"
+    pagination_url = "http://www.meganslaw.ca.gov/cgi/prosoma.dll?w6=%s\
+        &searchby=CountyList&SelectCounty=%s&SB=0&PageNo=%s"
+    profile_url = "http://www.meganslaw.ca.gov/cgi/prosoma.dll?w6=%s\
+        &searchby=offender&id=%s"
     session_id = None
     pages = None
+
+    def __init__(self, county, *args, **kwargs):
+        super(SexoffSpider, self).__init__(*args, **kwargs)
+        self.county = county
 
     def parse_first_page(self, response):
         sel = Selector(response)
@@ -40,7 +56,7 @@ class SexoffSpider(scrapy.Spider):
         for x in xrange(1, self.pages + 1):
             self.log('Requesting page: %s' % x, level=log.INFO)
             yield Request(
-                self.pagination_url % (self.session_id, x),
+                self.pagination_url % (self.session_id, self.county, x),
                 callback=self.parse_page)
 
     def parse_page(self, response):
@@ -93,7 +109,5 @@ class SexoffSpider(scrapy.Spider):
         self.log('SESSION ID: %s' % self.session_id, level=log.INFO)
         self.log('Requesting first page', level=log.INFO)
         yield Request(
-            self.pagination_url % (self.session_id, 1),
+            self.pagination_url % (self.session_id, self.county, 1),
             callback=self.parse_first_page)
-
-        
