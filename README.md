@@ -4,9 +4,9 @@ California Megan's Law Web Scraper
 A web scraper project to pull data from the California Megan's Law
 sex offender website at meganslaw.ca.gov.
 
-The scraper utilized the python Scrapy project to search and retrieve
-data from the site. Objects are returned to Scrapy's control where
-the user can specify the output format.
+The scraper utilizes the python Scrapy project to search and retrieve
+data from the site. Objects are geocoded with a pipeline utilizing
+Google's geocoding API.
 
 
 Getting Setup
