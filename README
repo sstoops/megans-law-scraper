@@ -1,3 +1,6 @@
+California Megan's Law Web Scraper
+==================================
+
 A web scraper project to pull data from the California Megan's Law
 sex offender website at meganslaw.ca.gov.
 
@@ -5,8 +8,23 @@ The scraper utilized the python Scrapy project to search and retrieve
 data from the site. Objects are returned to Scrapy's control where
 the user can specify the output format.
 
-County choices:
 
+Getting Setup
+-------------
+
+```bash
+mkvirtualenv project_name
+git clone this-repo
+cd repo-folder
+pip install -r requirements.txt
+scrapy runspider sexoff_scraper/spiders/sexoff.py -o output.json -a county=ORANGE
+```
+
+
+County Choices
+--------------
+
+```
 ALAMEDA
 ALPINE
 AMADOR
@@ -65,3 +83,4 @@ TUOLUMNE
 VENTURA
 YOLO
 YUBA
+```

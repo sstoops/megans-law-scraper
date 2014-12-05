@@ -14,7 +14,7 @@ class GeocoderPipeline(object):
 
     def process_item(self, item, spider):
         address = item['address'] or ''
-        if not address:
+        if not address or address == 'ABSCONDED':
             log.msg('Item has no address, skip geocode', level=log.WARNING)
             return item
         log.msg('Geocoding address: "%s"' % address)
@@ -34,7 +34,7 @@ class GeocoderPipeline(object):
                 }
             except:
                 log.msg('GEOCODING ERROR', level=log.ERROR)
-                raise
+                return item
         item['address'] = loc['address']
         item['lat'] = loc['latitude']
         item['lng'] = loc['longitude']
